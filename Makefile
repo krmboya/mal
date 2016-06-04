@@ -77,7 +77,7 @@ DOCKERIZE =
 
 IMPLS = ada awk bash c d clojure coffee cpp crystal cs erlang elisp \
 	elixir es6 factor forth fsharp go groovy guile haskell haxe \
-	io java julia js kotlin lua make mal ocaml matlab miniMAL \
+	io java julia js kenc kotlin lua make mal ocaml matlab miniMAL \
 	nim objc objpascal perl php plpgsql plsql ps python r racket \
 	rpython ruby rust scala swift swift3 tcl vb vhdl vimscript
 
@@ -163,6 +163,7 @@ haxe_STEP_TO_PROG =    $(haxe_STEP_TO_PROG_$(HAXE_MODE))
 io_STEP_TO_PROG =      io/$($(1)).io
 julia_STEP_TO_PROG =   julia/$($(1)).jl
 js_STEP_TO_PROG =      js/$($(1)).js
+kenc_STEP_TO_PROG =    kenc/$($(1))
 kotlin_STEP_TO_PROG =  kotlin/$($(1)).jar
 lua_STEP_TO_PROG =     lua/$($(1)).lua
 make_STEP_TO_PROG =    make/$($(1)).mk
