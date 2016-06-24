@@ -7,18 +7,29 @@ OBJECTS=$(patsubst %.c,%.o,$(SOURCES))  # make a list of .o files from SOURCES
 
 TEST_SRC=$(wildcard tests/*_tests.c)
 
-# list of tests to be executed
-TESTS= tests/libex29_tests
+# list of steps to build
+STEPS=step0_repl
 
-TARGET=build/libYOURLIBRARY.a
+# list of tests to be executed
+TESTS=
+
+# These are just libraries, important targets are the actual steps
+TARGET=build/libmal.a
 SO_TARGET=$(patsubst %.a,%.so,$(TARGET))
 
 # The Target Build
-all: $(TARGET) $(SO_TARGET) tests
+all: $(TARGET) $(SO_TARGET) tests steps
+
+# Compilation rules for each of the steps
+step0_repl: step0_repl.c $(TARGET)
+	$(CC) $(CFLAGS) $@.c $(LIBS) $(TARGET) -o $@
 
 # redefine CFLAGS then target all
 dev: CFLAGS=-g -Wall -Wall -Wextra -Isrc $(OPTFLAGS)
 dev: all
+
+# MAL steps
+steps: $(STEPS)
 
 # -fPIC generate position independent code, suitable for inclusion in libraries
 $(TARGET): CFLAGS += -fPIC
@@ -49,7 +60,7 @@ valgrind:
 
 # The Cleaner
 clean:
-	rm -rf build $(OBJECTS) $(TESTS)
+	rm -rf build $(OBJECTS) $(TESTS) $(STEPS)
 	rm -f tests/tests.log
 	find . -name "*.gc*" -exec rm {} \;
 	find . -name "*~" -exec rm {} \;
