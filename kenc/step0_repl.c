@@ -17,7 +17,7 @@ char* print(char* x)
 
 char* rep(char* x)
 {
-  return print(eval(read));
+  return print(eval(read(x)));
 }
 
 int main(int argc, char* argv[])
@@ -26,9 +26,7 @@ int main(int argc, char* argv[])
   while (1) {
     fputs("user> ", stdout);
     fgets(input, 256, stdin);
-    printf("%s", input);
+    printf("%s", rep(input));
   }
   return 0;
 }
-
-  
