@@ -8,7 +8,7 @@ OBJECTS=$(patsubst %.c,%.o,$(SOURCES))  # make a list of .o files from SOURCES
 TEST_SRC=$(wildcard tests/*_tests.c)
 
 # list of steps to build
-STEPS=step0_repl
+STEPS=step0_repl step1_read_print
 
 # list of tests to be executed
 TESTS=
@@ -22,6 +22,9 @@ all: $(TARGET) $(SO_TARGET) tests steps
 
 # Compilation rules for each of the steps
 step0_repl: step0_repl.c $(TARGET)
+	$(CC) $(CFLAGS) $@.c $(LIBS) $(TARGET) -o $@
+
+step1_read_print: step1_read_print.c $(TARGET)
 	$(CC) $(CFLAGS) $@.c $(LIBS) $(TARGET) -o $@
 
 # redefine CFLAGS then target all
